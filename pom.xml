@@ -11,7 +11,7 @@
 	<groupId>com.clase</groupId>
 	<artifactId>clase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>claseSpringB</name>
+	<name>BackendPortfolio</name>
 	<description>Clase de Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
