@@ -1,6 +1,7 @@
 
 package com.javainuse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -28,18 +29,28 @@ public class Educacion implements Serializable{
     private LocalDate fechaIni;
     @Column(name = "fechaFin")
     private LocalDate fechaFin;
+    private String urlFoto;
+    private String porcentajeTerminacion;
+    private String titulo;
     
+    
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "persona_id")
-    Persona pers;
+    @JoinColumn( nullable = false, updatable = false)
+    private Persona persona;
 
-    public Educacion(Long idEDUCACION, String instituto, LocalDate fechaIni, LocalDate fechaFin, Persona pers) {
+    public Educacion(Long idEDUCACION, String instituto, LocalDate fechaIni, LocalDate fechaFin, String urlFoto, String porcentajeTerminacion, String titulo, Persona persona) {
         this.idEDUCACION = idEDUCACION;
         this.instituto = instituto;
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
-        this.pers = pers;
+        this.urlFoto = urlFoto;
+        this.porcentajeTerminacion = porcentajeTerminacion;
+        this.titulo = titulo;
+        this.persona = persona;
     }
+
+    
 
    
 

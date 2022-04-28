@@ -33,15 +33,13 @@ public class Domicilio implements Serializable{
     @JoinColumn(name = "LocalidadId")
     private Localidad loca;
     
-    @OneToOne
-    @JoinColumn(name = "personaId")
-    private Persona pers;
+    
 
-    public Domicilio(Long idDOMICILIO, String direccion, Localidad loca, Persona pers) {
+    public Domicilio(Long idDOMICILIO, String direccion, Localidad loca) {
         this.idDOMICILIO = idDOMICILIO;
         this.direccion = direccion;
         this.loca = loca;
-        this.pers = pers;
+        
     }
 
     

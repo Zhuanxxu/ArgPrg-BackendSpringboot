@@ -68,6 +68,20 @@ public class controller {
         //ListaPersonas.add(per);
         persoServ.crearPersona(per);
     }
+    @GetMapping("/personaCompleta/{id}")
+    public Persona buscarPersonaCompleta(@PathVariable Long id){
+        
+        
+        return persoServ.buscarPersona(id);
+        
+    }
+
+    @GetMapping("/test/{correo}")
+    public Persona buscarPersonaEmail(@PathVariable String correo){
+       
+
+        return persoServ.buscarPersonaCorreo(correo).get(0);
+    }
     
     @PostMapping("/save/persona")
     public void actualizarPersona(@RequestBody Persona per) {
@@ -87,29 +101,6 @@ public class controller {
     public void borrarPersona(@PathVariable Long id){
         persoServ.borrarPersona(id);
     }
-    
-    @GetMapping("/ver/pruebas")
-    @ResponseBody
-    public List<Prueba> obtenerPrueba() {
-        return prueServ.verPruebas();
-        
-        //return ListaPersonas;
-    }
-    
-    @PostMapping("/new/prueba")
-    public void agregarPrueba(@RequestBody Prueba pru) {
-        //ListaPersonas.add(per);
-        prueServ.crearPrueba(pru);
-    }
-    
-    /*@PutMapping("/update/persona")
-    @ResponseBody
-    public String updatePersona(@RequestBody Persona per) {
-    //userRepository.save(user);
-    
-    ListaPersonas.set(ListaPersonas.indexOf(per)+1, per);
-    //ListaPersonas.
-    return "Updated"; }
-    
-    */
+
+
 }

@@ -16,7 +16,9 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -48,38 +50,28 @@ public class Persona implements Serializable {
     //la fecha que viene es AAAA/MM/DD
     @Column(name = "correo")
     private String correo;
-
-    /*
-    @OneToMany(mappedBy = "id")
-    List<Proyecto> proyList;
     
-    @OneToMany(mappedBy = "id")
-    List<Educacion> educList;
+    @ManyToOne()
+    @JoinColumn(name = "idDomicilio")
+    private Domicilio domicilio;
     
-    @OneToMany(mappedBy = "id")
-    List<Experiencia> expeList;
-    
-    @OneToMany(mappedBy = "id")
-    List<Usuario>  usuaList;
-    
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Usuario usua;
-    */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<Educacion> educacion;
     
     public Persona() {
     }
 
-    public Persona(Long id, String nombre, String apellido, LocalDate fechaNac, String correo) {
+    public Persona(Long id, String nombre, String apellido, LocalDate fechaNac, String correo, Domicilio domicilio, List<Educacion> educacion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNac = fechaNac;
         this.correo = correo;
+        this.domicilio = domicilio;
+        this.educacion = educacion;
     }
 
     
-  
-    
+
     
 }
