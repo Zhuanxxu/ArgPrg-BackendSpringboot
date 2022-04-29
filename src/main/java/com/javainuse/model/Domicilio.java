@@ -20,9 +20,8 @@ public class Domicilio implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idDOMICILIO")
-    private Long idDOMICILIO;
-    @Column(name = "direccion")
+
+    private Long id;
     private String direccion;
     
     /*@OneToOne
@@ -30,15 +29,15 @@ public class Domicilio implements Serializable{
     private Persona pers;*/
     
     @ManyToOne
-    @JoinColumn(name = "LocalidadId")
-    private Localidad loca;
+    @JoinColumn(name = "localidad_id")
+    private Localidad localidad;
     
     
 
-    public Domicilio(Long idDOMICILIO, String direccion, Localidad loca) {
-        this.idDOMICILIO = idDOMICILIO;
+    public Domicilio(Long id, String direccion, Localidad localidad) {
+        this.id = id;
         this.direccion = direccion;
-        this.loca = loca;
+        this.localidad = localidad;
         
     }
 

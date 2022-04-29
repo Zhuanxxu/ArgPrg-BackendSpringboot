@@ -31,17 +31,15 @@ public class Tecnologia implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idTECNOLOGIAS")
-    private Long idTECNOLOGIAS;
-    @Column(name = "tecnologias2")
+    private Long id;
     private String tecnologias;
 
     
     public Tecnologia() {
     }
 
-    public Tecnologia(Long idTECNOLOGIAS, String tecnologias) {
-        this.idTECNOLOGIAS = idTECNOLOGIAS;
+    public Tecnologia(Long id, String tecnologias) {
+        this.id = id;
         this.tecnologias = tecnologias;
     }
 

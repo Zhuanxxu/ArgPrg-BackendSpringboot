@@ -38,30 +38,29 @@ public class Persona implements Serializable {
    
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "nombre")
     private String nombre;
-    @Column(name = "apellido")
     private String apellido;
     
     @Basic
     private LocalDate fechaNac;
     //la fecha que viene es AAAA/MM/DD
-    @Column(name = "correo")
     private String correo;
     
     @ManyToOne()
-    @JoinColumn(name = "idDomicilio")
+    @JoinColumn()
     private Domicilio domicilio;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Educacion> educacion;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<Proyecto> proyectos;
+    
     public Persona() {
     }
 
-    public Persona(Long id, String nombre, String apellido, LocalDate fechaNac, String correo, Domicilio domicilio, List<Educacion> educacion) {
+    public Persona(Long id, String nombre, String apellido, LocalDate fechaNac, String correo, Domicilio domicilio, List<Educacion> educacion, List<Proyecto> proyectos) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -69,7 +68,10 @@ public class Persona implements Serializable {
         this.correo = correo;
         this.domicilio = domicilio;
         this.educacion = educacion;
+        this.proyectos = proyectos;
     }
+
+    
 
     
 

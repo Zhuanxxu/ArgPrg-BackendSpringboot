@@ -5,8 +5,10 @@
  */
 package com.javainuse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,9 +33,7 @@ public class Proyecto implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idPROYECTOS")
-    private Long idPROYECTOS;
-    @Column(name = "nombre_proyecto")
+    private Long id;
     private String nombreProy;
     private String descripcion;
 
@@ -41,21 +41,22 @@ public class Proyecto implements Serializable{
     /*@ManyToOne
     @JoinColumn(name = "id")
     Persona pers;*/
-    
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "persona_id")
-    Persona pers;
+    @JoinColumn()
+    Persona persona;
     
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    private List<TecnologiaProyecto> tecnologiaProyectos;
 
     public Proyecto() {
     }
 
-    public Proyecto(Long idPROYECTOS, String nombreProy, String desc, String desc2, Persona pers) {
-        this.idPROYECTOS = idPROYECTOS;
+    public Proyecto(Long id, String nombreProy, String desc, String desc2, Persona persona) {
+        this.id = id;
         this.nombreProy = nombreProy;
         this.descripcion = desc;
-        this.pers = pers;
+        this.persona = persona;
     }
     
     

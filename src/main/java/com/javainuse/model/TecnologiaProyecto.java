@@ -1,6 +1,7 @@
 
 package com.javainuse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,17 +20,18 @@ public class TecnologiaProyecto implements Serializable{
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "tecnologiaId")
-    private Tecnologia tecn;
+    @JoinColumn()
+    private Tecnologia tecnologia;
     
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "proyectoId")
-    private Proyecto proy;
+    @JoinColumn()
+    private Proyecto proyecto;
 
-    public TecnologiaProyecto(Long id, Tecnologia tecn, Proyecto proy) {
+    public TecnologiaProyecto(Long id, Tecnologia tecnologia, Proyecto proyecto) {
         this.id = id;
-        this.tecn = tecn;
-        this.proy = proy;
+        this.tecnologia = tecnologia;
+        this.proyecto = proyecto;
     }
 
     public TecnologiaProyecto() {

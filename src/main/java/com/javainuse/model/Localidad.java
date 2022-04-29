@@ -18,21 +18,17 @@ public class Localidad implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idLOCALIDAD")
-    private Long idLOCALIDAD;
-    @Column(name = "ciudad")
+    private Long id;
     private String ciudad;
-    @Column(name = "provincia")
     private String provincia;
-    @Column(name = "pais")
     private String pais;
     
 
     public Localidad() {
     }
 
-    public Localidad(Long idLOCALIDAD, String ciudad, String provincia, String pais) {
-        this.idLOCALIDAD = idLOCALIDAD;
+    public Localidad(Long id, String ciudad, String provincia, String pais) {
+        this.id = id;
         this.ciudad = ciudad;
         this.provincia = provincia;
         this.pais = pais;

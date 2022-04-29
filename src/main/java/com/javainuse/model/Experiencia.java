@@ -19,21 +19,17 @@ import lombok.Setter;
 public class Experiencia implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idEXPERIENCIA_LABORAL")
-    private Long idEXPERIENCIA_LABORAL;
-    @Column(name = "empleo")
+    private Long id;
     private String empleo;
-    @Column(name = "empresa")
     private String empresa;
-    @Column(name = "descripcion_actividad")
     private String descripcion_actividad;
     
     @ManyToOne
-    @JoinColumn(name = "persona_id")
+    @JoinColumn()
     Persona pers;
 
-    public Experiencia(Long idEXPERIENCIA_LABORAL, String empleo, String empresa, String descripcion_actividad, Persona pers) {
-        this.idEXPERIENCIA_LABORAL = idEXPERIENCIA_LABORAL;
+    public Experiencia(Long id, String empleo, String empresa, String descripcion_actividad, Persona pers) {
+        this.id = id;
         this.empleo = empleo;
         this.empresa = empresa;
         this.descripcion_actividad = descripcion_actividad;

@@ -21,13 +21,9 @@ import lombok.Setter;
 public class Educacion implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idEDUCACION")
-    private Long idEDUCACION;
-    @Column(name = "instituto")
+    private Long id;
     private String instituto;
-    @Column(name = "fechaIni")
     private LocalDate fechaIni;
-    @Column(name = "fechaFin")
     private LocalDate fechaFin;
     private String urlFoto;
     private String porcentajeTerminacion;
@@ -39,8 +35,8 @@ public class Educacion implements Serializable{
     @JoinColumn( nullable = false, updatable = false)
     private Persona persona;
 
-    public Educacion(Long idEDUCACION, String instituto, LocalDate fechaIni, LocalDate fechaFin, String urlFoto, String porcentajeTerminacion, String titulo, Persona persona) {
-        this.idEDUCACION = idEDUCACION;
+    public Educacion(Long id, String instituto, LocalDate fechaIni, LocalDate fechaFin, String urlFoto, String porcentajeTerminacion, String titulo, Persona persona) {
+        this.id = id;
         this.instituto = instituto;
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
