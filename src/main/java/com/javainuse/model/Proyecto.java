@@ -36,6 +36,7 @@ public class Proyecto implements Serializable{
     private Long id;
     private String nombreProy;
     private String descripcion;
+    private String url;
 
 
     /*@ManyToOne

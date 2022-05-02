@@ -28,6 +28,7 @@ public class Educacion implements Serializable{
     private String urlFoto;
     private String porcentajeTerminacion;
     private String titulo;
+    private String descripcion;
     
     
     @JsonIgnore

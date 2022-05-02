@@ -18,6 +18,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -41,11 +42,16 @@ public class Persona implements Serializable {
     private Long id;
     private String nombre;
     private String apellido;
-    
     @Basic
     private LocalDate fechaNac;
     //la fecha que viene es AAAA/MM/DD
     private String correo;
+    private String descripcion;
+    private String titulo;
+    private int edad;
+    private String urlFotoPerfil;
+    private String urlFotoPortada;
+    
     
     @ManyToOne()
     @JoinColumn()
@@ -57,23 +63,13 @@ public class Persona implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Proyecto> proyectos;
     
+    @ManyToMany(mappedBy = "personas")
+    private List<Skill> skills;
+    
+    
+    
     public Persona() {
     }
-
-    public Persona(Long id, String nombre, String apellido, LocalDate fechaNac, String correo, Domicilio domicilio, List<Educacion> educacion, List<Proyecto> proyectos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaNac = fechaNac;
-        this.correo = correo;
-        this.domicilio = domicilio;
-        this.educacion = educacion;
-        this.proyectos = proyectos;
-    }
-
-    
-
-    
 
     
 }
