@@ -5,10 +5,13 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Domicilio;
+
 /**
  *
  * @author agust
  */
 public interface IDomicilioService {
-    
+    public Domicilio buscarDomicilio(Long id);
+    public void saveDomicilio(Domicilio domic);
 }

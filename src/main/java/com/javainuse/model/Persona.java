@@ -4,6 +4,7 @@
  */
 package com.javainuse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
@@ -63,9 +65,13 @@ public class Persona implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Proyecto> proyectos;
     
+    
     @ManyToMany(mappedBy = "personas")
     private List<Skill> skills;
     
+    @OneToMany(mappedBy = "persona")
+    private List<FileDB> fileDbs;
+   
     
     
     public Persona() {

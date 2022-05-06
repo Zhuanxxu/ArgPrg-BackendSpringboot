@@ -5,10 +5,13 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Proyecto;
+
 /**
  *
  * @author agust
  */
 public interface IProyectoService {
-    
+    public Proyecto buscarProyecto(Long id);
+    public void saveProyecto(Proyecto educa);
 }

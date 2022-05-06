@@ -5,6 +5,7 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Domicilio;
 import com.javainuse.repository.DomicilioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,17 @@ import org.springframework.stereotype.Service;
 public class DomicilioService implements IDomicilioService{
     
     @Autowired
-    public DomicilioRepository domiRepo;
+    public DomicilioRepository domicRepo;
     
+    @Override
+    public Domicilio buscarDomicilio(Long id){
+        return domicRepo.findById(id).orElse(null);
+    }
+    
+    @Override
+    public void saveDomicilio(Domicilio domic){
+        domicRepo.save(domic);
+    }
+    
+   
 }

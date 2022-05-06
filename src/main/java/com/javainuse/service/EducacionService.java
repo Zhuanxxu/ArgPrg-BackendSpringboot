@@ -5,6 +5,7 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Educacion;
 import com.javainuse.repository.EducacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class EducacionService implements IEducacionService{
     @Autowired
-    public EducacionRepository educRepo;
+    public EducacionRepository educaRepo;
+    
+    
+    
+    @Override
+    public Educacion buscarEducacion(Long id){
+        return educaRepo.findById(id).orElse(null);
+    }
+    
+    @Override
+    public void saveEducacion(Educacion educa){
+        educaRepo.save(educa);
+    }
 }

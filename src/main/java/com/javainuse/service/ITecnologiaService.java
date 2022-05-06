@@ -5,10 +5,13 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Tecnologia;
+
 /**
  *
  * @author agust
  */
 public interface ITecnologiaService {
-    
+    public Tecnologia buscarTecnologia(Long id);
+    public void saveTecnologia(Tecnologia tecno);
 }

@@ -5,6 +5,7 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Tecnologia;
 import com.javainuse.repository.TecnologiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,4 +18,14 @@ import org.springframework.stereotype.Service;
 public class TecnologiaService implements ITecnologiaService{
     @Autowired
     public TecnologiaRepository tecnRepo;
+    
+    @Override
+    public Tecnologia buscarTecnologia(Long id){
+        return tecnRepo.findById(id).orElse(null);
+    }
+    
+    @Override
+    public void saveTecnologia(Tecnologia tecno){
+        tecnRepo.save(tecno);
+    }
 }

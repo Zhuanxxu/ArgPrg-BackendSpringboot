@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// We don't need CSRF for this example
 		httpSecurity.cors().and().csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate","/register").permitAll().
+				.authorizeRequests().antMatchers("/authenticate","/register","/files*","/filesUnico/*/*","/filesUnico/*","/files/*","/files/*/*").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
@@ -71,8 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             final CorsConfiguration config = new CorsConfiguration();
-
-            config.setAllowedOrigins(Arrays.asList("https://argprogramaangularhost.web.app"));
+            String lista[]
+                = new String[] { "http://localhost:4200", "https://thawing-citadel-18441.herokuapp.com/authenticate","https://argprogramaangularhost.web.app"};
+            config.setAllowedOrigins(Arrays.asList(lista));
             config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
             config.setAllowCredentials(true);
             config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));

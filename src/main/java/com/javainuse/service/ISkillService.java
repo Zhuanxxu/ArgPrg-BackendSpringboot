@@ -5,10 +5,15 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Skill;
+import java.util.List;
+
 /**
  *
  * @author agust
  */
-public interface IUsuarioService {
-    
+public interface ISkillService {
+    public void saveSkill(Skill skill);
+    public Skill buscarSkill(Long id);
+    public List<Skill> verSkills();
 }

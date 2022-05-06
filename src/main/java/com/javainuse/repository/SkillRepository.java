@@ -5,8 +5,7 @@
  */
 package com.javainuse.repository;
 
-
-import com.javainuse.model.Usuario;
+import com.javainuse.model.Skill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author agust
  */
-
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+public interface SkillRepository extends JpaRepository<Skill, Long>{
     
 }

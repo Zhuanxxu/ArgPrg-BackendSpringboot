@@ -5,16 +5,32 @@
  */
 package com.javainuse.service;
 
+import com.javainuse.model.Localidad;
 import com.javainuse.repository.LocalidadRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author agust
- */
+
 @Service
 public class LocalidadService implements ILocalidadService{
     @Autowired
-    public LocalidadRepository locaRepo;
+    public LocalidadRepository localRepo;
+    
+    
+    @Override
+    public Localidad buscarLocalidad(Long id){
+        return localRepo.findById(id).orElse(null);
+    }
+    
+    @Override
+    public void saveLocalidad(Localidad local){
+        localRepo.save(local);
+    }
+    
+    @Override
+    public List<Localidad> verLocalidades() {
+       return  localRepo.findAll();
+    }
+    
 }
