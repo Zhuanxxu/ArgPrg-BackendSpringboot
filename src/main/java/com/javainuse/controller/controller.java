@@ -224,11 +224,11 @@ public class controller {
                                         @RequestParam (required = false,name = "persona_id") Long nuevaPersonaId){
         Educacion educa = educaServ.buscarEducacion(id);
         
-        if (!(nuevaDescripcion==null)) {educa.setDescripcion(nuevaDescripcion);}
-        if (!(nuevoInstituto==null)) {educa.setInstituto(nuevoInstituto);}
-        if (!(nuevoTitulo==null)) {educa.setTitulo(nuevoTitulo);}
+        if (!(nuevaDescripcion==null|| nuevaDescripcion.isEmpty())) {educa.setDescripcion(nuevaDescripcion);}
+        if (!(nuevoInstituto==null|| nuevoInstituto.isEmpty())) {educa.setInstituto(nuevoInstituto);}
+        if (!(nuevoTitulo==null|| nuevoTitulo.isEmpty())) {educa.setTitulo(nuevoTitulo);}
         
-        if (!(nuevaPersonaId==null)) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
+        if (!(nuevaPersonaId==null|| String.valueOf(nuevaPersonaId).isEmpty())) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
                                         educa.setPersona(perso);}
        
         educaServ.saveEducacion(educa);
@@ -320,12 +320,21 @@ public class controller {
   private FileStorageService storageService;
     
     @PutMapping("/editarfoto/{id}")
-  public ResponseEntity<ResponseMessage> editFoto(@RequestParam("file") MultipartFile file,@PathVariable Long id) {
+  public ResponseEntity<ResponseMessage> editFoto(@RequestParam("file") MultipartFile file,@PathVariable Long id,
+                                                    @RequestParam("lugar") String lugar) {
       Persona persona = persoServ.buscarPersona(id);
-      FileDB fileDb = storageService.buscarPorPersona(persona).get(0);
+      List<FileDB> fileDbs = storageService.buscarPorPersona(persona);
+      FileDB fileDb = new FileDB();
+      for(FileDB iterador :fileDbs) {
+          if (iterador.getLugar() == null ? lugar == null : iterador.getLugar().equals(lugar)) {
+              fileDb=iterador;
+              break;
+          }
+      }
+      
       String message = "";
     try {
-      storageService.storeActualizar(file,persona,fileDb);
+      storageService.storeActualizar(file,persona,fileDb,lugar);
       message = "Foto actualizada correctamente: " + file.getOriginalFilename();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     } catch (Exception e) {
@@ -336,11 +345,12 @@ public class controller {
   }
   
   @PostMapping("/upload/{id}")
-  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,@PathVariable Long id) {
+  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,@PathVariable Long id,
+                                                    @RequestParam("lugar") String lugar) {
     String message = "";
     Persona persona = persoServ.buscarPersona(id);
     try {
-      storageService.store(file,persona);
+      storageService.store(file,persona,lugar);
       message = "Uploaded the file successfully: " + file.getOriginalFilename();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     } catch (Exception e) {
@@ -350,13 +360,13 @@ public class controller {
   }
  
   
-
+/*
   @GetMapping("/files")
   public ResponseEntity<List<ResponseFile>> getListFiles() {
     List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
       String fileDownloadUri = ServletUriComponentsBuilder
           .fromCurrentContextPath()
-          .path("/files/")
+          .path("/filesUnico/")
           .path(dbFile.getId())
           .toUriString();
 
@@ -368,20 +378,62 @@ public class controller {
     }).collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.OK).body(files);
-  }
+  }*/
 
-  @GetMapping("/filesUnico/{id}/{lugar}")
-  public ResponseEntity<byte[]> getFile(@PathVariable Long id,@PathVariable String lugar) {
-      Persona persona = persoServ.buscarPersona(id);
+  @GetMapping("/filesUnico/{idPerso}/{lugar}")
+  public ResponseEntity<byte[]> getFile(@PathVariable Long idPerso,@PathVariable String lugar) {
+      Persona persona = persoServ.buscarPersona(idPerso);
       List<FileDB> fileDbs = storageService.buscarPorPersona(persona);
       //storageService.buscarPorPersona(persona).get(0);
        //FileDB fileDB = fileDbs.buscarPorLugar(lugar).get(0);
-       FileDB fileDB = fileDbs.get(0);
+       FileDB fileDB = new FileDB();
+       for(FileDB iterador :fileDbs) {
+          if (iterador.getLugar() == null ? lugar == null : iterador.getLugar().equals(lugar)) {
+              fileDB=iterador;
+              break;
+          }
+      }
+       
+       
        System.out.println(fileDB);
+       FileDB entrega = new FileDB();
+       entrega.setId(fileDB.getId());
+       return getImagenPath(fileDB.getId());
+    /*return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+        .body(entrega);*/
+  }
+  
+  //@GetMapping("/imagen/{id}")
+  public ResponseEntity<byte[]> getImagenPath( String id) {
+      FileDB fileDB = storageService.getFile(id);
+      
+      
     return ResponseEntity.ok()
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
         .body(fileDB.getImagen());
   }
-  
+  @GetMapping("/files")
+  public ResponseEntity<List<ResponseFile>> getListaNueva() {
+    List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
+      String fileDownloadUri = ServletUriComponentsBuilder
+          .fromCurrentContextPath()
+          .path("/filesUnico/")
+          .path(String.valueOf(dbFile.getPersonaId()))
+          .path("/")
+          .path(dbFile.getLugar())
+          .toUriString();
+
+      return new ResponseFile(
+          dbFile.getName(),
+          fileDownloadUri,
+          dbFile.getType(),
+          dbFile.getImagen().length,
+          dbFile.getPersonaId(),
+          dbFile.getLugar());
+    }).collect(Collectors.toList());
+
+    return ResponseEntity.status(HttpStatus.OK).body(files);
+  }
   
 }

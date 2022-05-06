@@ -8,7 +8,7 @@ import com.javainuse.model.Persona;
 import java.util.List;
 
 @Repository
-public interface FileDBRepository extends JpaRepository<FileDB, Long> {
+public interface FileDBRepository extends JpaRepository<FileDB, String> {
     List<FileDB> findByPersona(Persona persona);
     List<FileDB> findByLugar(String lugar);
 }

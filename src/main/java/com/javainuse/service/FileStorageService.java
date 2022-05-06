@@ -26,16 +26,16 @@ public class FileStorageService {
     return  fileDBRepository.findByLugar(lugar);
 }
   
-  public FileDB store(MultipartFile file,Persona persona) throws IOException {
+  public FileDB store(MultipartFile file,Persona persona, String lugar) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(),persona);
+    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(),persona,lugar);
     
     return fileDBRepository.save(FileDB);
   }
   
-  public FileDB storeActualizar(MultipartFile file,Persona persona,FileDB fileDb) throws IOException {
+  public FileDB storeActualizar(MultipartFile file,Persona persona,FileDB fileDb, String lugar) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(),persona);
+    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(),persona, lugar);
     fileDb.setName(fileName);
     fileDb.setType(file.getContentType());
     fileDb.setImagen(file.getBytes());
@@ -43,7 +43,7 @@ public class FileStorageService {
     return fileDBRepository.save(fileDb);
   }
 
-  public FileDB getFile(Long id) {
+  public FileDB getFile(String id) {
     return fileDBRepository.findById(id).get();
   }
   

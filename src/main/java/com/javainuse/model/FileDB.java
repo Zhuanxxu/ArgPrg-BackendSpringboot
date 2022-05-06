@@ -31,7 +31,9 @@ public class FileDB {
   private String lugar;
   
   private String type;
-
+  
+  private String path;
+@JsonIgnore
   @Lob
   @Basic(fetch = FetchType.LAZY) 
     @Column(name="datos", columnDefinition="longblob", nullable=true) 
@@ -55,11 +57,13 @@ public class FileDB {
     this.id = Long;
   }*/
   
-  public FileDB( String name, String type, byte[] imagen, Persona persona) {
+  public FileDB( String name, String type, byte[] imagen, Persona persona,String lugar) {
         this.name = name;
         this.type = type;
         this.imagen = imagen;
         this.persona = persona;
+        this.lugar = lugar;
+        this.path = "filesUnico/" + String.valueOf(persona.getId()) +"/"+lugar;
   }
 
     public String getId() {
@@ -89,5 +93,27 @@ public class FileDB {
   public void setImagen(byte[] data) {
     this.imagen = data;
   }
+  public void setId(String id){
+      this.id = id;
+  }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public Long getPersonaId() {
+        return persona.getId();
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+    
+    
+  
 
 }
