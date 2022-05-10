@@ -16,7 +16,7 @@ import com.javainuse.model.Persona;
 import com.javainuse.model.Proyecto;
 import com.javainuse.model.Skill;
 import com.javainuse.model.Tecnologia;
-import com.javainuse.model.TecnologiaProyecto;
+
 import com.javainuse.service.FileStorageService;
 import com.javainuse.service.IDomicilioService;
 import com.javainuse.service.IEducacionService;
@@ -24,7 +24,7 @@ import com.javainuse.service.ILocalidadService;
 import com.javainuse.service.IPersonaService;
 import com.javainuse.service.IProyectoService;
 import com.javainuse.service.ISkillService;
-import com.javainuse.service.ITecnologiaProyectoService;
+
 import com.javainuse.service.ITecnologiaService;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -81,8 +81,7 @@ public class controller {
     private ISkillService skillServ;
     @Autowired
     private ITecnologiaService tecnoServ;
-    @Autowired
-    private ITecnologiaProyectoService tecnoProyeServ;
+
  
     
     
@@ -122,7 +121,6 @@ public class controller {
     
    
     
-    @GetMapping("ver/ss/fotos")
     
     
     
@@ -296,27 +294,6 @@ public class controller {
         
     }
     
-    @PutMapping("tecnologia_proyecto/editar/{id}")
-    public TecnologiaProyecto actualizarTecnologiaProyecto(@PathVariable Long id,
-                                                            @RequestParam (required = false,name = "proyectoId") Long nuevoProyetoId,
-                                                            @RequestParam (required = false,name = "tecnologiaId") Long nuevoTecnologiaId){
-        
-        TecnologiaProyecto tecnoProye = tecnoProyeServ.buscarTecnologiaProyecto(id);
-        
-        if (!(nuevoTecnologiaId==null)) {
-            Tecnologia tecno = tecnoServ.buscarTecnologia(nuevoTecnologiaId);
-            tecnoProye.setTecnologia(tecno);         
-        }
-        if (!(nuevoProyetoId==null)) {
-            Proyecto proye = proyeServ.buscarProyecto(nuevoProyetoId);
-            tecnoProye.setProyecto(proye);
-        }
-        
-        tecnoProyeServ.saveTecnologiaProyecto(tecnoProye);
-        
-        return tecnoProye;
-        
-    }
     
     //Metodos para fotos
     

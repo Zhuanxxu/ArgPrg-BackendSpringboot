@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -37,7 +39,18 @@ public class Proyecto implements Serializable{
     private String nombreProy;
     private String descripcion;
     private String url;
-
+    
+    @JsonIgnore
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "proyectos_tecnologias",
+            joinColumns = {@JoinColumn(name = "tecnologia_id")},
+            inverseJoinColumns = {@JoinColumn(name = "proyecto_id")}
+    )
+    private List<Tecnologia> tecnologias;
 
     /*@ManyToOne
     @JoinColumn(name = "id")
@@ -47,8 +60,7 @@ public class Proyecto implements Serializable{
     @JoinColumn()
     Persona persona;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<TecnologiaProyecto> tecnologiaProyectos;
+    
 
     public Proyecto() {
     }
