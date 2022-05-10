@@ -7,6 +7,7 @@ package com.javainuse.service;
 
 import com.javainuse.model.Proyecto;
 import com.javainuse.repository.ProyectoRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,17 @@ public class ProyectoService implements IProyectoService{
     }
     
     @Override
+    public List<Proyecto> verProyectos(){
+        return proyRepo.findAll();
+    }
+    
+    @Override
     public void saveProyecto(Proyecto educa){
         proyRepo.save(educa);
+    }
+    
+    @Override
+    public void nuevoProyecto(Proyecto proyecto){
+        proyRepo.save(proyecto);
     }
 }

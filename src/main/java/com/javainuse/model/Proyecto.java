@@ -7,7 +7,9 @@ package com.javainuse.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,21 +36,22 @@ import lombok.Setter;
 public class Proyecto implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombreProy;
     private String descripcion;
     private String url;
     
-    @JsonIgnore
+    
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.MERGE,
+            CascadeType.DETACH
     })
     @JoinTable(
             name = "proyectos_tecnologias",
-            joinColumns = {@JoinColumn(name = "tecnologia_id")},
-            inverseJoinColumns = {@JoinColumn(name = "proyecto_id")}
+            joinColumns = {@JoinColumn(name = "proyecto_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tecnologia_id")}
     )
     private List<Tecnologia> tecnologias;
 

@@ -96,6 +96,14 @@ public class controller {
         
     }
     
+    @GetMapping("/ver/tecnologias")
+    @ResponseBody
+    public List<Tecnologia> obtenerTecnologias() {
+        return tecnoServ.verTecnologias();
+        
+        //return ListaPersonas;
+    }
+    
     
     
     @GetMapping("/test/{correo}")
@@ -119,7 +127,11 @@ public class controller {
         return localServ.verLocalidades();
     }
     
-   
+    @GetMapping("ver/proyectos")
+    @ResponseBody 
+    public List<Proyecto> obtenerProyectos(){
+        return proyeServ.verProyectos();
+    }
     
     
     
@@ -139,6 +151,11 @@ public class controller {
     public void actualizarPersona(@RequestBody Persona per) {
         //ListaPersonas.add(per);
         persoServ.crearPersona(per);
+    }
+    
+    @PostMapping("/add/proyecto")
+    public void nuevoProyecto(@RequestBody Proyecto proyecto){
+        proyeServ.nuevoProyecto(proyecto);
     }
     
     

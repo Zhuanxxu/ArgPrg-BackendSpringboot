@@ -6,6 +6,7 @@
 package com.javainuse.service;
 
 import com.javainuse.model.Tecnologia;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import com.javainuse.model.Tecnologia;
 public interface ITecnologiaService {
     public Tecnologia buscarTecnologia(Long id);
     public void saveTecnologia(Tecnologia tecno);
+    public List<Tecnologia> verTecnologias() ;
 }

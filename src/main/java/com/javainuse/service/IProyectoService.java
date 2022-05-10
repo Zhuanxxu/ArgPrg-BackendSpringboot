@@ -6,6 +6,7 @@
 package com.javainuse.service;
 
 import com.javainuse.model.Proyecto;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import com.javainuse.model.Proyecto;
 public interface IProyectoService {
     public Proyecto buscarProyecto(Long id);
     public void saveProyecto(Proyecto educa);
+    public void nuevoProyecto(Proyecto proyecto);
+    public List<Proyecto> verProyectos();
 }

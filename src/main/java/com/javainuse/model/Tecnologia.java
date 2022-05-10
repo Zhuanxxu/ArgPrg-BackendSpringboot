@@ -5,8 +5,11 @@
  */
 package com.javainuse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,22 +25,20 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author agust
- */
+
 @Getter @Setter
 @Entity
 @Table(name = "Tecnologia")
 public class Tecnologia implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tecnologias;
     
-    @ManyToMany(mappedBy = "personas")
-    private List<Skill> skills;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "tecnologias")
+    private List<Proyecto> proyectos;
     
     public Tecnologia() {
     }
