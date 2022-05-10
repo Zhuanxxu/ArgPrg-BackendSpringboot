@@ -26,6 +26,7 @@ import com.javainuse.service.IProyectoService;
 import com.javainuse.service.ISkillService;
 import com.javainuse.service.ITecnologiaProyectoService;
 import com.javainuse.service.ITecnologiaService;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashSet;
 //import java.util.ArrayList;
@@ -96,6 +97,8 @@ public class controller {
         
     }
     
+    
+    
     @GetMapping("/test/{correo}")
     public Persona buscarPersonaEmail(@PathVariable String correo){
        
@@ -117,11 +120,9 @@ public class controller {
         return localServ.verLocalidades();
     }
     
-    @GetMapping("ver/skills")
-    @ResponseBody
-    public List<Skill> obtenerSkills(){
-        return skillServ.verSkills();
-    }
+   
+    
+    @GetMapping("ver/ss/fotos")
     
     
     
@@ -221,7 +222,8 @@ public class controller {
                                         @RequestParam (required = false,name = "porcentaje_terminacion") String nuevoPorcentaje,
                                         @RequestParam (required = false,name = "titulo") String nuevoTitulo,
                                         @RequestParam (required = false,name = "descripcion") String nuevaDescripcion,
-                                        @RequestParam (required = false,name = "persona_id") Long nuevaPersonaId){
+                                        @RequestParam (required = false,name = "persona_id") Long nuevaPersonaId,
+                                        @RequestParam (required = false,name = "foto") MultipartFile fotoEducacion) throws IOException{
         Educacion educa = educaServ.buscarEducacion(id);
         
         if (!(nuevaDescripcion==null|| nuevaDescripcion.isEmpty())) {educa.setDescripcion(nuevaDescripcion);}
@@ -230,6 +232,8 @@ public class controller {
         
         if (!(nuevaPersonaId==null|| String.valueOf(nuevaPersonaId).isEmpty())) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
                                         educa.setPersona(perso);}
+        
+        if (!(fotoEducacion==null|| String.valueOf(fotoEducacion).isEmpty())) {educa.setImagen(fotoEducacion.getBytes());}
        
         educaServ.saveEducacion(educa);
         
@@ -264,10 +268,10 @@ public class controller {
         
         Skill skill = skillServ.buscarSkill(id);
         
-        if (!(nuevaDescripcion==null)) {skill.setDescripcion(nuevaDescripcion);}
+        if (!(nuevaDescripcion==null || nuevaDescripcion.isEmpty())) {skill.setDescripcion(nuevaDescripcion);}
         if (!(nuevoPorcentaje_completo==null)) {skill.setPorcentajeCompleto(nuevoPorcentaje_completo);}
-        if (!(nuevaUrl_foto==null)) {skill.setUrlFoto(nuevaUrl_foto);}
-        if (!(nuevaPersonaId==null)) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
+        if (!(nuevaUrl_foto==null || nuevaUrl_foto.isEmpty())) {skill.setUrlFoto(nuevaUrl_foto);}
+        if (!(nuevaPersonaId==null || nuevaPersonaId.toString().isEmpty())) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
             if (!skill.getPersonas().contains(perso) && perso != null){
                 skill.getPersonas().add(perso);
             }

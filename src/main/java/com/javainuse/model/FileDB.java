@@ -25,24 +25,22 @@ public class FileDB {
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   //@GeneratedValue(strategy = GenerationType.AUTO)
   private String id;
-
   private String name;
-
   private String lugar;
-  
   private String type;
+ 
   
   private String path;
-@JsonIgnore
+  @JsonIgnore
   @Lob
   @Basic(fetch = FetchType.LAZY) 
-    @Column(name="datos", columnDefinition="longblob", nullable=true) 
+  @Column(name="datos", columnDefinition="longblob", nullable=true) 
   private byte[] imagen;
   
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn( nullable = false, updatable = false)
-    private Persona persona;
+  @JsonIgnore
+  @ManyToOne
+  @JoinColumn( nullable = false, updatable = false)
+  private Persona persona;
     
   public FileDB() {
   }

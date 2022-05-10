@@ -39,6 +39,7 @@ public class FileStorageService {
     fileDb.setName(fileName);
     fileDb.setType(file.getContentType());
     fileDb.setImagen(file.getBytes());
+    fileDb.setPath("filesUnico/" + String.valueOf(persona.getId()) +"/"+lugar);
     
     return fileDBRepository.save(fileDb);
   }

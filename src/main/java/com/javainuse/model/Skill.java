@@ -28,6 +28,7 @@ public class Skill {
     String descripcion;
     String urlFoto;
     int porcentajeCompleto;
+    String tipo;
     
     
     @JsonIgnore
@@ -45,11 +46,12 @@ public class Skill {
     public Skill() {
     }
 
-    public Skill(Long id, String descripcion, String urlFoto, int porcentajeCompleto) {
+    public Skill(Long id, String descripcion, String urlFoto, int porcentajeCompleto,String tipo) {
         this.id = id;
         this.descripcion = descripcion;
         this.urlFoto = urlFoto;
         this.porcentajeCompleto = porcentajeCompleto;
+        this.tipo = tipo;
         
     }
 
