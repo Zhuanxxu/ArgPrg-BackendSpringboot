@@ -1,0 +1,176 @@
+@startuml
+annotation com.fasterxml.jackson.annotation.JsonIgnore
+annotation com.javainuse.model.Column
+annotation com.javainuse.model.Entity
+annotation com.javainuse.model.GeneratedValue
+annotation com.javainuse.model.Id
+annotation com.javainuse.model.Table
+annotation javax.persistence.Basic
+annotation javax.persistence.Column
+annotation javax.persistence.Entity
+annotation javax.persistence.GeneratedValue
+annotation javax.persistence.Id
+annotation javax.persistence.JoinColumn
+annotation javax.persistence.JoinTable
+annotation javax.persistence.Lob
+annotation javax.persistence.ManyToMany
+annotation javax.persistence.ManyToOne
+annotation javax.persistence.OneToMany
+annotation javax.persistence.Table
+annotation lombok.Getter
+annotation lombok.Setter
+annotation org.hibernate.annotations.GenericGenerator
+class com.javainuse.model.DAOUser
+class com.javainuse.model.Domicilio
+class com.javainuse.model.Educacion
+class com.javainuse.model.FileDB
+class com.javainuse.model.JwtRequest
+class com.javainuse.model.JwtResponse
+class com.javainuse.model.Localidad
+class com.javainuse.model.Persona
+class com.javainuse.model.Proyecto
+class com.javainuse.model.Skill
+class com.javainuse.model.Tecnologia
+class com.javainuse.model.UserDTO
+class java.sql.Date
+class java.time.LocalDate
+class java.util.ArrayList
+class java.util.HashSet
+class java.util.List
+class java.util.Optional
+class java.util.Set
+class javax.persistence.CascadeType
+class javax.persistence.FetchType
+class javax.persistence.GenerationType
+class javax.persistence.OneToOne
+class javax.persistence.Temporal
+class javax.persistence.TemporalType
+com.javainuse.model.DAOUser ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.DAOUser ..> com.javainuse.model.Column
+com.javainuse.model.DAOUser ..> com.javainuse.model.Entity
+com.javainuse.model.DAOUser ..> com.javainuse.model.GeneratedValue
+com.javainuse.model.DAOUser ..> com.javainuse.model.Id
+com.javainuse.model.DAOUser ..> com.javainuse.model.Table
+com.javainuse.model.Domicilio ..> javax.persistence.Column
+com.javainuse.model.Domicilio ..> javax.persistence.Entity
+com.javainuse.model.Domicilio ..> javax.persistence.GeneratedValue
+com.javainuse.model.Domicilio ..> javax.persistence.Id
+com.javainuse.model.Domicilio ..> javax.persistence.JoinColumn
+com.javainuse.model.Domicilio ..> javax.persistence.ManyToOne
+com.javainuse.model.Domicilio ..> javax.persistence.Table
+com.javainuse.model.Domicilio ..> lombok.Getter
+com.javainuse.model.Domicilio ..> lombok.Setter
+com.javainuse.model.Domicilio ..> javax.persistence.FetchType
+com.javainuse.model.Domicilio ..> javax.persistence.GenerationType
+com.javainuse.model.Domicilio ..> javax.persistence.OneToOne
+com.javainuse.model.Educacion ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.Educacion ..> javax.persistence.Basic
+com.javainuse.model.Educacion ..> javax.persistence.Column
+com.javainuse.model.Educacion ..> javax.persistence.Entity
+com.javainuse.model.Educacion ..> javax.persistence.GeneratedValue
+com.javainuse.model.Educacion ..> javax.persistence.Id
+com.javainuse.model.Educacion ..> javax.persistence.JoinColumn
+com.javainuse.model.Educacion ..> javax.persistence.Lob
+com.javainuse.model.Educacion ..> javax.persistence.ManyToOne
+com.javainuse.model.Educacion ..> javax.persistence.Table
+com.javainuse.model.Educacion ..> lombok.Getter
+com.javainuse.model.Educacion ..> lombok.Setter
+com.javainuse.model.Educacion ..> java.time.LocalDate
+com.javainuse.model.Educacion ..> javax.persistence.FetchType
+com.javainuse.model.Educacion ..> javax.persistence.GenerationType
+com.javainuse.model.FileDB ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.FileDB ..> javax.persistence.Basic
+com.javainuse.model.FileDB ..> javax.persistence.Column
+com.javainuse.model.FileDB ..> javax.persistence.Entity
+com.javainuse.model.FileDB ..> javax.persistence.GeneratedValue
+com.javainuse.model.FileDB ..> javax.persistence.Id
+com.javainuse.model.FileDB ..> javax.persistence.JoinColumn
+com.javainuse.model.FileDB ..> javax.persistence.Lob
+com.javainuse.model.FileDB ..> javax.persistence.ManyToOne
+com.javainuse.model.FileDB ..> javax.persistence.Table
+com.javainuse.model.FileDB ..> org.hibernate.annotations.GenericGenerator
+com.javainuse.model.FileDB ..> javax.persistence.CascadeType
+com.javainuse.model.FileDB ..> javax.persistence.FetchType
+com.javainuse.model.FileDB ..> javax.persistence.GenerationType
+com.javainuse.model.FileDB ..> javax.persistence.OneToOne
+com.javainuse.model.Localidad ..> javax.persistence.Column
+com.javainuse.model.Localidad ..> javax.persistence.Entity
+com.javainuse.model.Localidad ..> javax.persistence.GeneratedValue
+com.javainuse.model.Localidad ..> javax.persistence.Id
+com.javainuse.model.Localidad ..> javax.persistence.Table
+com.javainuse.model.Localidad ..> lombok.Getter
+com.javainuse.model.Localidad ..> lombok.Setter
+com.javainuse.model.Localidad ..> javax.persistence.GenerationType
+com.javainuse.model.Persona ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.Persona ..> javax.persistence.Basic
+com.javainuse.model.Persona ..> javax.persistence.Column
+com.javainuse.model.Persona ..> javax.persistence.Entity
+com.javainuse.model.Persona ..> javax.persistence.GeneratedValue
+com.javainuse.model.Persona ..> javax.persistence.Id
+com.javainuse.model.Persona ..> javax.persistence.JoinColumn
+com.javainuse.model.Persona ..> javax.persistence.ManyToMany
+com.javainuse.model.Persona ..> javax.persistence.ManyToOne
+com.javainuse.model.Persona ..> javax.persistence.OneToMany
+com.javainuse.model.Persona ..> javax.persistence.Table
+com.javainuse.model.Persona ..> lombok.Getter
+com.javainuse.model.Persona ..> lombok.Setter
+com.javainuse.model.Persona ..> java.sql.Date
+com.javainuse.model.Persona ..> java.time.LocalDate
+com.javainuse.model.Persona ..> java.util.List
+com.javainuse.model.Persona ..> java.util.Optional
+com.javainuse.model.Persona ..> javax.persistence.CascadeType
+com.javainuse.model.Persona ..> javax.persistence.GenerationType
+com.javainuse.model.Persona ..> javax.persistence.OneToOne
+com.javainuse.model.Persona ..> javax.persistence.Temporal
+com.javainuse.model.Persona ..> javax.persistence.TemporalType
+com.javainuse.model.Proyecto ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.Proyecto ..> javax.persistence.Column
+com.javainuse.model.Proyecto ..> javax.persistence.Entity
+com.javainuse.model.Proyecto ..> javax.persistence.GeneratedValue
+com.javainuse.model.Proyecto ..> javax.persistence.Id
+com.javainuse.model.Proyecto ..> javax.persistence.JoinColumn
+com.javainuse.model.Proyecto ..> javax.persistence.JoinTable
+com.javainuse.model.Proyecto ..> javax.persistence.ManyToMany
+com.javainuse.model.Proyecto ..> javax.persistence.ManyToOne
+com.javainuse.model.Proyecto ..> javax.persistence.OneToMany
+com.javainuse.model.Proyecto ..> javax.persistence.Table
+com.javainuse.model.Proyecto ..> lombok.Getter
+com.javainuse.model.Proyecto ..> lombok.Setter
+com.javainuse.model.Proyecto ..> java.util.ArrayList
+com.javainuse.model.Proyecto ..> java.util.HashSet
+com.javainuse.model.Proyecto ..> java.util.List
+com.javainuse.model.Proyecto ..> java.util.Set
+com.javainuse.model.Proyecto ..> javax.persistence.CascadeType
+com.javainuse.model.Proyecto ..> javax.persistence.GenerationType
+com.javainuse.model.Proyecto ..> javax.persistence.OneToOne
+com.javainuse.model.Skill ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.Skill ..> javax.persistence.Entity
+com.javainuse.model.Skill ..> javax.persistence.GeneratedValue
+com.javainuse.model.Skill ..> javax.persistence.Id
+com.javainuse.model.Skill ..> javax.persistence.JoinColumn
+com.javainuse.model.Skill ..> javax.persistence.JoinTable
+com.javainuse.model.Skill ..> javax.persistence.ManyToMany
+com.javainuse.model.Skill ..> lombok.Getter
+com.javainuse.model.Skill ..> lombok.Setter
+com.javainuse.model.Skill ..> java.util.List
+com.javainuse.model.Skill ..> javax.persistence.CascadeType
+com.javainuse.model.Skill ..> javax.persistence.GenerationType
+com.javainuse.model.Tecnologia ..> com.fasterxml.jackson.annotation.JsonIgnore
+com.javainuse.model.Tecnologia ..> javax.persistence.Column
+com.javainuse.model.Tecnologia ..> javax.persistence.Entity
+com.javainuse.model.Tecnologia ..> javax.persistence.GeneratedValue
+com.javainuse.model.Tecnologia ..> javax.persistence.Id
+com.javainuse.model.Tecnologia ..> javax.persistence.JoinColumn
+com.javainuse.model.Tecnologia ..> javax.persistence.ManyToMany
+com.javainuse.model.Tecnologia ..> javax.persistence.ManyToOne
+com.javainuse.model.Tecnologia ..> javax.persistence.Table
+com.javainuse.model.Tecnologia ..> lombok.Getter
+com.javainuse.model.Tecnologia ..> lombok.Setter
+com.javainuse.model.Tecnologia ..> java.util.HashSet
+com.javainuse.model.Tecnologia ..> java.util.List
+com.javainuse.model.Tecnologia ..> java.util.Set
+com.javainuse.model.Tecnologia ..> javax.persistence.CascadeType
+com.javainuse.model.Tecnologia ..> javax.persistence.FetchType
+com.javainuse.model.Tecnologia ..> javax.persistence.GenerationType
+com.javainuse.model.Tecnologia ..> javax.persistence.OneToOne
+@enduml
