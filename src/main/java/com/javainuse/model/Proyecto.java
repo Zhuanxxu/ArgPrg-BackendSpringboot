@@ -7,6 +7,7 @@ package com.javainuse.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +54,7 @@ public class Proyecto implements Serializable{
             joinColumns = {@JoinColumn(name = "proyecto_id")},
             inverseJoinColumns = {@JoinColumn(name = "tecnologia_id")}
     )
-    private List<Tecnologia> tecnologias;
+    private List<Tecnologia> tecnologias = new ArrayList<Tecnologia>();
 
     /*@ManyToOne
     @JoinColumn(name = "id")
@@ -75,6 +76,9 @@ public class Proyecto implements Serializable{
         this.persona = persona;
     }
     
+    public void ponerTecnologia(Tecnologia tecnologia){
+        tecnologias.add(tecnologia);
+    }
     
     
 }

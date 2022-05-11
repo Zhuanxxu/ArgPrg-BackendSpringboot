@@ -171,6 +171,17 @@ public class controller {
     
     //Metodos @Put  --->   Path para editar registros
     
+    @PutMapping("/prueba/{tecnologiaId}/{proyectoId}")
+    public Proyecto prueba(
+            @PathVariable Long tecnologiaId,
+            @PathVariable Long proyectoId){
+        Proyecto proyecto = proyeServ.buscarProyecto(proyectoId);
+        Tecnologia tecnologia = tecnoServ.buscarTecnologia(tecnologiaId);
+        proyecto.ponerTecnologia(tecnologia);
+        
+        return proyeServ.saveProyecto(proyecto);
+    }
+    
     @PutMapping ("personas/editar/{id}")
     public Persona actualizarPersona(@PathVariable Long id,
                                      @RequestParam (required = false,name = "nombre") String nuevoNombre,
@@ -241,7 +252,7 @@ public class controller {
                                         @RequestParam (required = false,name = "foto") MultipartFile fotoEducacion) throws IOException{
         Educacion educa = educaServ.buscarEducacion(id);
         
-        if (!(nuevaDescripcion==null|| nuevaDescripcion.isEmpty())) {educa.setDescripcion(nuevaDescripcion);}
+        if (!(nuevaDescripcion==null || nuevaDescripcion.isEmpty())) {educa.setDescripcion(nuevaDescripcion);}
         if (!(nuevoInstituto==null|| nuevoInstituto.isEmpty())) {educa.setInstituto(nuevoInstituto);}
         if (!(nuevoTitulo==null|| nuevoTitulo.isEmpty())) {educa.setTitulo(nuevoTitulo);}
         
@@ -254,25 +265,73 @@ public class controller {
         
         return educa;
     }
+    /*@PutMapping("/prueba/{tecnologiaId}/{proyectoId}")
+    public Proyecto prueba(
+            @PathVariable Long tecnologiaId,
+            @PathVariable Long proyectoId){
+        Proyecto proyecto = proyeServ.buscarProyecto(proyectoId);
+        Tecnologia tecnologia = tecnoServ.buscarTecnologia(tecnologiaId);
+        proyecto.ponerTecnologia(tecnologia);
+        
+        return proyeServ.saveProyecto(proyecto);
+    }*/
+    
     
     @PutMapping("proyecto/editar/{id}")
     public Proyecto actualizarProyecto(@PathVariable Long id,
                                        @RequestParam (required = false,name = "descripcion") String nuevaDescripcion,
                                        @RequestParam (required = false,name = "nombre_proy") String nuevoNombre_proy,
                                        @RequestParam (required = false,name = "url") String nuevoUrl,
-                                       @RequestParam (required = false,name = "persona_id") Long nuevaPersonaId){
+                                       @RequestParam (required = false,name = "persona_id") Long nuevaPersonaId,
+                                       @RequestParam (required = false,name = "tecnologia_id") String nuevaTecnologiaIds){
+        
+        
         Proyecto proye = proyeServ.buscarProyecto(id);
         
-        if (!(nuevaDescripcion==null)) {proye.setDescripcion(nuevaDescripcion);}
-        if (!(nuevoNombre_proy==null)) {proye.setNombreProy(nuevoNombre_proy);}
-        if (!(nuevoUrl==null)) {proye.setUrl(nuevoUrl);}
-        if (!(nuevaPersonaId==null)) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
-                                        proye.setPersona(perso);}
         
+        if (!(nuevaDescripcion==null || nuevaDescripcion.isEmpty())) {proye.setDescripcion(nuevaDescripcion);}
+        if (!(nuevoNombre_proy==null || nuevoNombre_proy.isEmpty())) {proye.setNombreProy(nuevoNombre_proy);}
+        if (!(nuevoUrl==null || nuevoUrl.isEmpty())) {proye.setUrl(nuevoUrl);}
+        if (!(nuevaPersonaId==null || nuevaPersonaId.toString().isEmpty())) {Persona perso = persoServ.buscarPersona(nuevaPersonaId);
+                                        proye.setPersona(perso);}
+        System.out.println(nuevaTecnologiaIds);
+        if (!(nuevaTecnologiaIds==null || nuevaTecnologiaIds.isEmpty())) {
+            String[] nuevasTecnologiasIdsArray = nuevaTecnologiaIds.split(",");
+            Tecnologia tecno = null;
+            proye.getTecnologias().clear();
+            for(String iterador: nuevasTecnologiasIdsArray){
+                tecno = tecnoServ.buscarTecnologia(Long.parseLong(iterador));
+                proye.ponerTecnologia(tecno);
+            }
+        }
+
         proyeServ.saveProyecto(proye);
         
         return proye;
     }
+    
+    /*@PutMapping("proyecto/editarTecnologia/{id}")
+    public Proyecto actualizarProyectoBorrar(@PathVariable Long id,
+                                             @RequestParam (required = false,name = "tecnologia_id") String nuevaTecnologiaIds){
+        
+        
+        Proyecto  proye = proyeServ.buscarProyecto(id);
+       
+        if (!(nuevaTecnologiaIds==null || nuevaTecnologiaIds.isEmpty())) {
+            String[] nuevasTecnologiasIdsArray = nuevaTecnologiaIds.split(",");
+            Tecnologia tecno = null;
+            for(String iterador: nuevasTecnologiasIdsArray){
+                tecno = tecnoServ.buscarTecnologia(Long.parseLong(iterador));
+                if (proye.getTecnologias().)
+                proye.ponerTecnologia(tecno);
+            }
+        }
+
+        proyeServ.saveProyecto(proye);
+        
+        return proye;
+    }
+    */
     
     @PutMapping("skill/editar/{id}")
     public Skill actualizarSkill(@PathVariable Long id,

@@ -22,7 +22,7 @@ public class TecnologiaService implements ITecnologiaService{
     
     @Override
     public Tecnologia buscarTecnologia(Long id){
-        return tecnRepo.findById(id).orElse(null);
+        return tecnRepo.findById(id).get();
     }
     
     @Override

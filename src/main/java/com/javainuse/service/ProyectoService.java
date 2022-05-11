@@ -22,8 +22,14 @@ public class ProyectoService implements IProyectoService{
     
     @Override
     public Proyecto buscarProyecto(Long id){
-        return proyRepo.findById(id).orElse(null);
+        System.out.println(proyRepo.findById(id));
+        if(proyRepo.findById(id).orElse(null)==null){
+            return null;
+        } else{
+            return proyRepo.findById(id).get();
+        }
     }
+      
     
     @Override
     public List<Proyecto> verProyectos(){
@@ -31,8 +37,8 @@ public class ProyectoService implements IProyectoService{
     }
     
     @Override
-    public void saveProyecto(Proyecto educa){
-        proyRepo.save(educa);
+    public Proyecto saveProyecto(Proyecto proyecto){
+        return proyRepo.save(proyecto);
     }
     
     @Override

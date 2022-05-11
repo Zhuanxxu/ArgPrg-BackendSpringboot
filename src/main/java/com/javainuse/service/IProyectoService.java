@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IProyectoService {
     public Proyecto buscarProyecto(Long id);
-    public void saveProyecto(Proyecto educa);
+    public Proyecto saveProyecto(Proyecto proyecto);
     public void nuevoProyecto(Proyecto proyecto);
     public List<Proyecto> verProyectos();
 }
